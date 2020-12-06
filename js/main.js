@@ -1,37 +1,33 @@
-let isNumber = function(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-}
-
 function random() {
-    let m = Math.random();
-    m = m * 100;
-    m = Math.round(m);
-    console.log('Число: ' + m);
+    let rand = Math.random() * 100;
+    rand = Math.round(rand);
+    console.log('Число - ' + rand);
 
     function guess() {
         let ask = prompt('Угадай число от 1 до 100');
-        if (ask === null) {
+        ask = parseInt(ask);
+        if (ask === 0) {
             alert('Игра окончена');
-            return;
+            return guess();
         }
-        if (!isNumber(ask)) {
+        if (isNaN(ask)) {
             console.log(typeof(ask));
             alert('Введи число');
         }
         console.log(ask);
-        if (ask === m) {
-            confirm('Поздравляю. Вы угадали');
+        if (+ask === rand) {
+            alert('Поздравляю. Вы угадали');
             console.log(typeof(ask));
-        } else if (ask > m) {
+        } else if (ask > rand) {
             confirm('Загаданное число больше');
-            return guess();
-        } else if (ask < m) {
+            guess();
+        } else if (ask < rand) {
             confirm('Загаданное число меньше');
-            return guess();
+            guess();
         } else {
-            return guess();
+            guess();
         }
     }
-    return guess();
+    guess();
 }
 random();
